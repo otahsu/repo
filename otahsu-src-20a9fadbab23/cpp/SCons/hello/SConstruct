@@ -1,0 +1,20 @@
+import atexit
+def print_build_failures():
+    from SCons.Script import GetBuildFailures
+    err_list = list()
+    log_file = open("./scons.log", 'w')
+    for bf in GetBuildFailures():
+        #print "%s failed: %s" % (bf.node, bf.errstr)
+        err_list.append("!!!!" + bf.errstr)
+        log_file.write(bf.errstr) 
+    print err_list
+    log_file.close()
+
+print "!!before build." 
+env = Environment()
+env.Program(target='hello', source='main.cpp')
+atexit.register(print_build_failures) 
+print "!!after trying build."
+SConscript('SConscript')
+print_build_failures()
+#vim : set filetype=python:

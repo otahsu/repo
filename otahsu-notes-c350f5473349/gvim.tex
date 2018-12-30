@@ -1,0 +1,52 @@
+\documentclass[12pt,a4paper]{article}
+\title{Note of Unix Programing}
+\author{OTA Hsu}
+\begin{document}
+\maketitle
+    \section{Vim}
+        \begin{itemize}
+        \item
+        VIM is improved VI. GVIM is graphic VIM.
+        \item
+        VIM would initialize the settings in ~/.vimrc then ~/.gvimrc if they
+        exist.
+        \item
+        In Win version, note that the setting of "map" for copy/paste and
+        the setting of "behave xterm". 
+        \end{itemize}
+        \subsection{Start the application}
+        In terminal, we can open gvim with multiple files in once.
+        
+        \$ gvim *.py -p
+        \subsection{Set environment}
+        The "set" command can be manipulated in ~/.vimrc, in command mode,
+        or in the end of the text file.
+        
+        Ex. In the end of a .py file, we add 
+        
+        \# vim: set filetype=python fileformat=unix fileencoding=utf-8
+        autoindent number shiftwidth=4 tabstop=4 extendtab textwidth=79.
+        Where extendtab means that substituting 'tab' with many 'space',
+        tabstop is the number of 'space', shiftwidth it the width of one
+        indent that press '>>' in normal mode.
+        \subsection{Normal mode}
+        \begin{itemize}
+        \item
+        split window, 'Ctrl+w' then 'Ctrl+s'
+        \item
+        into Insert mode, 'i'
+        \item
+        into Replace mode, 'R'
+        \item
+        delete 3 lines right after cursor, '3dd'
+        \item 
+        yank copy 3 lines right after cursor, '3yy'
+        \item
+        \end{itemize}
+        \subsection{Command mode}
+        \subsection{Insert/Replace mode}
+        \subsection{Visual/Select mode}
+
+
+\end{document}
+

@@ -1,0 +1,4 @@
+# build target with source.
+> Scons
+# clear target.
+> Scons -c

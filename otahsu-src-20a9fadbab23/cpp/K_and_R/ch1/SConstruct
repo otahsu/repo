@@ -1,0 +1,7 @@
+print "!!before build." 
+env = Environment()
+env.Program(target='ex1', source=Glob('ch1-1.cpp'))
+print "!!after trying build."
+SConscript('SConscript')
+
+# vim: set ft=python ff=unix fenc=utf8 ai et sw=4 ts=4 tw=79:

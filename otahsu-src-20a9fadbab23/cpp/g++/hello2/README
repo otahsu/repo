@@ -1,0 +1,5 @@
+// compilation.
+$ g++ -c main.cpp foo.cpp
+// link .o to executable file - 'main.exe'
+$ g++ -o main foo.o main.o
+

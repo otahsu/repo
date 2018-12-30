@@ -1,0 +1,59 @@
+import os
+
+# import the global scons objs.
+Import('env', 'everything', 'static')
+
+## generate object files.
+hope = env.CustomCompiler(Glob('src/HOPE/*'))
+layoutop = env.CustomCompiler(Glob('src/LayoutOp/*')) 
+basekit = env.CustomCompiler(Glob('src/BaseKit/*'))
+griapi = env.CustomCompiler(Glob('src/GriApi/*')) 
+
+## link into libxxx.a .
+static.append( env.CustomLinker("HOPE", nodes=hope, want_static=True))
+static.append( env.CustomLinker("LayoutOp", nodes=layoutop, want_static=True))
+static.append( env.CustomLinker("BaseKit", nodes=basekit, want_static=True))
+static.append( env.CustomLinker("GriApi", nodes=griapi, want_static=True))
+
+## archive all *.o into libGriffey.a    
+objList = []
+objList.extend([ hope, layoutop, basekit, griapi ])
+static.append( env.CustomLinker("Griffey", nodes=objList, want_static=True))
+
+## creates phony targets - 'static' to 'everything'.
+everything.append(Alias('static', static))
+
+# in-project library list.
+libsList = ['GriApi', 'LayoutOp', 'HOPE', 'BaseKit'] 
+     
+# Ctypes wrapper.
+ctypes = env.CustomLinker("PyGriffey", 
+                           nodes=env.CustomCompiler(Glob('src/PyGriffey')),
+                           libs=libsList, want_pywrap=True)
+everything.append(Alias('ctypes', ctypes))
+
+# set targets for executables.
+for sdir in Glob('src/bin/*'):
+    sdir = str(sdir)
+    if not os.path.isdir(sdir):
+        continue
+    if not Glob(str(sdir)+'/*.cpp'):
+        continue
+    sname = sdir.split('/')[-1]
+    everything.append( Alias('exe/'+sname,
+                       env.CustomLinker(sname, nodes=env.CustomCompiler([sdir]),
+                                        libs= libsList, want_executable=True)))
+# set targets for sandboxes.
+for sdir in Glob('src/sandbox_bin/*'):
+    sdir = str(sdir)
+    if not os.path.isdir(sdir):
+        continue
+    if not Glob(str(sdir)+'/*.cpp'):
+        continue
+    sname = sdir.split('/')[-1]
+    everything.append( Alias('sandbox/'+sname,
+                              env.CustomLinker(sname, nodes=env.CustomCompiler([sdir]),
+                                               libs=libsList, binary_dir=sdir,
+                                               want_executable=True)))
+
+# vim: set ft=python ff=unix fenc=utf8 ai et nu sw=4 ts=4 tw=105:

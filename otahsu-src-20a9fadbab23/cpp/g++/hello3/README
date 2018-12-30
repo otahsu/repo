@@ -1,0 +1,3 @@
+//? link to libary that is "libm.a" or "libm.so"and include in <>?
+$ g++ -o main main.o foo.o -lm -L/lib -I/usr/include
+

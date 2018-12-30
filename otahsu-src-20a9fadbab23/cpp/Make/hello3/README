@@ -1,0 +1,15 @@
+//makefile syntax
+target: obj1.o obj2.o
+<tab>   g++ -o main obj1.o obj2.o
+target: 
+<tab>   rm -f *
+
+//search rule of enviroment variables.
+make 指令列後面加上的環境變數為優先；
+makefile 裡面指定的環境變數第二；
+shell 原本具有的環境變數第三。
+此外，還有一些特殊的變數需要瞭解的喔：
+$@：代表目前的標的(target)
+
+//execute makefile
+$ make [target1 taget2]

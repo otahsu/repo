@@ -1,0 +1,9 @@
+// g++ -c, Compile and assemble, but do not link
+// g++ -o <output file>, Place the output into <file>
+// g++ -o exe main.o foo.o
+
+// compile "main.cpp" in all-in-one to the execute file "main.exe".
+// -o is output.
+$ g++ -o main main.cpp
+// run the execute file in Bash.
+$ ./main.exe

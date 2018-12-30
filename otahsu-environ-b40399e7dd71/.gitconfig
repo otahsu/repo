@@ -1,0 +1,14 @@
+[difftool "kdiff3"]
+	path = /vol0/ap/iht/x86_64_rh4/ihtruntime/bin/kdiff3
+	trustExitCode = false
+[difftool]
+	prompt = false
+[diff]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	path = /vol0/ap/iht/x86_64_rh4/ihtruntime/bin/kdiff3
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
+[merge]
+	tool = kdiff3

@@ -1,0 +1,5 @@
+// compile "main.cpp" in all-in-one to the execute file "main.exe".
+// -o is output.
+$ g++ -o main main.cpp
+// run the execute file in Bash.
+$ ./main.exe

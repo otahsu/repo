@@ -1,0 +1,5 @@
+env = Environment()
+env.Program(target='exe', source=Glob('*.cpp'))
+SConscript('SConscript')
+
+#vim: set ft=python:

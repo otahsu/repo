@@ -1,0 +1,117 @@
+import os, sys
+import SCons
+sys.path.insert(0, "/vol0/ap/iht/site_scons/")
+from config import Environment_IHT
+Decider('timestamp-newer')
+
+# paths containing required header files.
+include_paths = [
+    'src/HOPE/db',
+    'src/HOPE/gds_oasis_IO',
+    'src/LayoutOp/MiscEng',
+    'src/LayoutOp/BooleanExp',
+    'src/LayoutOp/RegionSearch',
+    'src/LayoutOp/Grouping',
+    'src/LayoutOp/PatternMatching',
+    'src/LayoutOp/PatternMatching2',
+    'src/LayoutOp/PatternTracing',
+    'src/LayoutOp/Rtree',
+    'src/LayoutOp/RuleSearch',
+    'src/LayoutOp/Smooth',
+    'src/LayoutOp/Fracture',
+    'src/BaseKit/Util',
+    'src/BaseKit/DP',
+    'src/BaseKit/DP_UDP',
+    'src/GriApi/query',
+    'src/GriApi/util',
+    'src/GriApi/marker',
+    'src/GriApi/gauge',
+    'src/PyGriffey/',
+]
+
+# win32.
+if sys.platform.startswith('win'):
+    DEFAULT_QT_PATH = 'W:/OPC2/InHouseTool/windev/Qt4.8.1'
+else:
+    DEFAULT_QT_PATH = os.environ.get('IHTROOT', '')
+
+# the standard environment.
+env = Environment_IHT(ENV=os.environ, tools=['default', 'gcc', 'iht_140724'],
+        toolpath=['/vol0/ap/iht/site_scons/site_tools'],
+        BUILD_DIR=GetOption('build_dir'),
+        LIBRARY_DIR=GetOption('library_dir'),
+        BINARY_DIR=GetOption('binary_dir'),
+        PURIFY_ON=GetOption('purify'),
+        QUANTIFY_ON=GetOption('quantify'),
+        STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME = 'yes', # for linking .o to .so
+        #link lib keyword list. #TODO: 140611 the order maybe critical - instead Prepend with Append.
+        LIB_LINK_LIST=['ssl', 'basic'])
+
+# in-project library path.
+env.Append(LIBPATH=[GetOption('library_dir')])
+
+# in-project includes.
+env.Append(CPPPATH=include_paths)
+
+#TODO 140627: flag that must have that iGrouping regression cases?
+if 0:
+    env.Append(CPPFLAGS=['-O2'])
+
+# for EBO release.
+AddOption('--deploy-ebo', dest='deploy_ebo', action='store_true',
+    default=False,
+    help='Build for EBO Release')
+if not GetOption('deploy_ebo'):
+    env.Append(CPPFLAGS=['-DBUILDOPC'])
+
+# set variables available to sconscript files.
+everything = list()
+static = list()
+## export the global scons objs.
+Export('env', 'everything', 'static')
+
+# reads another Sconscript under pwd.
+## sorted() is build-in function in Python.
+SConscript(sorted(Glob('SConscript*'))) 
+
+# clean targets by force with option '-c'.
+Clean(everything, ["build"])
+
+# do build targets after reading SConscripts,
+# where Default(target_list) can be seen as a called-back method.
+launchdir = GetLaunchDir()
+if 'sandbox_bin' in launchdir:
+    sname = os.path.basename(launchdir)
+    Default('sandbox/%s' % sname)
+elif 'src/bin' in launchdir:
+    sname = os.path.basename(launchdir)
+    Default('exe/%s' % sname)
+else:
+    Default(*everything) # build targets. 
+
+# deploy.
+## options for deployment.
+AddOption('--dis-deploy-header', dest='dis-deploy_header', action='store_true', 
+    default=False,
+    help='Disable to deploy header files to ./inc')
+copy_list = list()
+if not GetOption('dis-deploy_header'):
+    # file lists for headers.
+    top_dict = Dir('#').abspath; # abspath of top dict for this project.
+    deploy_include_path = top_dict + "/inc"
+    for header in Flatten([ [Glob('%s/*.h'%path), Glob('%s/*.tpp'%path)]\
+        for path in include_paths ]):
+        # path of the source.
+        spath = str(header.abspath)
+        # path of the destination.
+        dpath = '%s/%s' % (deploy_include_path, os.path.basename(spath)) 
+        if 0 :
+            copy_list.append(env.Command(dpath, spath, [
+                Copy('$TARGET', '$SOURCE'),
+            ]))
+        else:
+            from shutil import copy
+            copy(spath, dpath)
+Default(*copy_list) # build copy targets.
+
+# vim: set ft=python ff=unix fenc=utf8 ai et nu sw=4 ts=4 tw=105:

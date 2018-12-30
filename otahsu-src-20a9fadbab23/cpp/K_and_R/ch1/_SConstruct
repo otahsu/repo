@@ -1,0 +1,23 @@
+import os, sys, SCons
+Decider('timestamp-newer')
+os.environ['IHTROOT'] = "/vol0/ap/iht/x86_64_rh4/ihtruntime" 
+sys.path.insert(0, "/vol0/ap/iht/site_scons/")
+from config import Environment_IHT
+
+HEADER_PATHS = [ '/vol0/ap/iht/x86_64_rh4/ihtruntime/include',
+               ]
+LIB_PATHS = [ '/vol0/ap/iht/x86_64_rh4/ihtruntime/lib64',
+              '/vol0/ap/iht/x86_64_rh4/ihtruntime/lib',
+            ]
+LIBS = [ 'python2.7', ]
+env = Environment_IHT( ENV=os.environ, tools=['default', 'gcc', 'iht_tmp'],
+                       toolpath=['/vol0/ap/iht/site_scons/site_tools'],
+                       PURIFY_ON=GetOption('purify'),
+                       QUANTIFY_ON=GetOption('quantify'),
+                       LIB_LINK_LIST=['basic']
+                     )
+env.Append(CPPPATH = HEADER_PATHS)
+env.Append(LIBPATH = LIB_PATHS)
+env.QuickMake('main', extfn='.cpp', libs=LIBS, want_executable=True)
+
+# vim: set ft=python ff=unix fenc=utf8 ai et nu sw=4 ts=4 tw=85:

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+latex ./gvim.tex
+pdftex ./gvim.tex
+
+#vim set: ft=sh :#
