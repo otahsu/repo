@@ -9,5 +9,4 @@ set expandtab
 set ruler
 set nu
 colorscheme koehler
-set guifont=monospace\ 12
-set guioptions-=T
+set guifont=courier:h16
