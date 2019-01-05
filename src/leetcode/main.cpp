@@ -21,6 +21,10 @@ int main(){
     if (sol.reverseString("Hello")== "olleh"){
         cout << "Success!\n" ;
     };
+    
+    int a; //primary type: no defualt constuctor, and the initial value is not sure.
+    string s; //call defalt constructor, size is 0.
+
     return 0;
 
 }
