@@ -31,13 +31,25 @@ public:
 
 };
 
+class Solution3 {
+public:
+    string reverseString(string s){
+        for (int i = 0; i < s.size()/2; ++i){
+            char c = s[i]; //do swap
+            s[i] = s[s.size()-1-i];
+            s[s.size()-1-i] = c;
+        }
+        return s;
+    }
+
+};
 
 int main(){
     //printf("");
     //std::cout << "h e" <std::endl;
     //cout << "h e" <endl;
-    Solution1 sol;
-    if (sol.reverseString("Hello") == "olleH"){
+    Solution1 sol1;
+    if (sol1.reverseString("Hello") == "olleH"){
         cout << "ver1 Success!\n" ;
     };
     
@@ -46,6 +58,10 @@ int main(){
         cout << "ver2 Success!\n" ;
     }
     
+    Solution3 sol3;
+    if (sol3.reverseString("Hello") == "olleH"){
+        cout << "ver3 Success!\n" ;
+    }
     return 0;
 }
 
