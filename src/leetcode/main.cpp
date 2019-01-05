@@ -8,7 +8,9 @@ using namespace std;
 class Solution {
 public:
     string reverseString(string s) {
-        reverse(begin(s), end(s));
+        //reverse(begin(s), end(s));
+        string r; // r is not ary.
+        r[3] = 'a'; // r.operator[](3) //it's op overload.
         return s;
     }
 };
@@ -23,8 +25,12 @@ int main(){
     };
     
     int a; //primary type: no defualt constuctor, and the initial value is not sure.
+    int ******a[3]; //right first: so it's a array of pointer, not pointer.
     string s; //call defalt constructor, size is 0.
 
+    int a[3] = {1,2,3}; //def: a iff is a array only when[] is after.
+    // a[b] <==> *(a+b) 
+    1[a]; //it eq to a[1]; 
     return 0;
 
 }
