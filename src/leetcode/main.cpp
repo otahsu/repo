@@ -10,7 +10,9 @@ public:
     string reverseString(string s) {
         //reverse(begin(s), end(s));
         string r; // r is not ary.
-        r[3] = 'a'; // r.operator[](3) //it's op overload.
+        //r[3] = 'a'; // r.operator[](3) //it's op overload.
+        
+        }
         return s;
     }
 };
@@ -31,6 +33,18 @@ int main(){
     int a[3] = {1,2,3}; //def: a iff is a array only when[] is after.
     // a[b] <==> *(a+b) 
     1[a]; //it eq to a[1]; 
+    
+    // C-style ary
+    int a[3];
+    // C++ style array
+    int 
+    // C-style string
+
+    int a[] = {3,4,5};// C-stryle ary initalizer.
+    vector<int> b(3); // b is objector, vector, is c++-array 
+    vector<int> b = {3,4,5}; // b is objector, vector, is c++-array.After C++11 vector can use list-initializer. 
+    vector<int> b(3); // b is objector, vector, is c++-array size of 3, initalize to 0,0,0. 
+    
     return 0;
 
 }
