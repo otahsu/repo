@@ -1,12 +1,34 @@
+#include <stdlib.h>
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
-int main() {
-    for (int i=0; i < 4; i++) {
-        for (int j=i+1; j < 4; j++) { // To ensure j>i, 6-pairs
-           cout << i << ", "<< j << endl; 
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for (int i=0; i < nums.size(); i++) { 
+        //size_t is a type of unsigned-int, but the size is depending by compiler
+        //enviroment. 
+            for (int j=i+1; j < nums.size(); j++) {
+                if ( nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
         }
+    
+        return {}; //null case.
     }
+};
+
+int main() {
+
+    Solution sol;
+    vector<int> nums={1, 2, 8, 9};
+
+    cout << sol.twoSum(nums, 9)[0] << ", " << sol.twoSum(nums, 9)[1]<< endl;
+
     return 0;
 }
 
