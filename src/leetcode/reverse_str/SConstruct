@@ -15,7 +15,7 @@ def print_build_failures():
 print "!!before build." 
 env = Environment()
 env.Program(target='main', source=[glob.glob('*.cpp')])
-env.Append( CXXFLAGS = ['-std=c++11','-Wall'])
+env.Append( CXXFLAGS = ['-std=c++11','-Wall']) #-pedantic，令編譯器拒絕非標準特性。
 atexit.register(print_build_failures) 
 print "!!after trying build."
 SConscript('SConscript')
