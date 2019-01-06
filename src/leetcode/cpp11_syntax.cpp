@@ -1,4 +1,5 @@
 //need to re-organize.
+//190105 1st course
 //Fail to compiler these in-class! why?
 /*
 class CppTypeDemo {
@@ -26,6 +27,24 @@ public:
 
 };
 */
+//190106 2nd course
+int a;
+int *c;
+int d[3][2];
+int *e[3][2]; //ary
+int (*f)[5]; //pointer; 遇到()優先;否則右邊先
+int (*g[3])[5];
+
+vector<int> h;
+vector<vector<int>> v; //vecotor of vector; 
+
+
+
+
+
+
+
+
 
 
 // vim: set ft=cpp ff=unix fenc=utf8 ai et nu sw=4 ts=4 tw=85:
