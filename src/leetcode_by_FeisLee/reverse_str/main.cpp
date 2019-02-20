@@ -3,7 +3,7 @@
 #include <string> //for string
 #include <algorithm> //for std::reverse
 #include <vector> //for std::vector
-
+#include <utility> // for std::swap
 using namespace std; 
 
 
@@ -44,6 +44,17 @@ public:
 
 };
 
+class Solution4 {
+public:
+    string reverseString(string s){
+        for (int i = 0; i < s.size()/2; ++i){
+            swap(s[i] = s[s.size()-1-i]);
+        }
+        return s;
+    }
+
+};
+
 int main(){
     //printf("");
     //std::cout << "h e" <std::endl;
@@ -62,6 +73,12 @@ int main(){
     if (sol3.reverseString("Hello") == "olleH"){
         cout << "ver3 Success!\n" ;
     }
+    
+    Solution4 sol4;
+    if (sol4.reverseString("Hello") == "olleH"){
+        cout << "ver4 Success!\n" ;
+    }
+    
     return 0;
 }
 
