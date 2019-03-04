@@ -1,9 +1,14 @@
 /*
+<<<<<<< HEAD
     Sample C-code from 良葛格:
     https://openhome.cc/Gossip/AlgorithmGossip/SelectionInsertionBubble.htm
     See the antimation demo on visulago:
     https://visualgo.net/en/sorting
 
+=======
+    Sample C-code from 良葛格
+    https://openhome.cc/Gossip/AlgorithmGossip/SelectionInsertionBubble.htm
+>>>>>>> 8240db76ebd5d65965a27733ba7ca506b790aeba
 */
 
 #include <stdio.h> 
