@@ -1,8 +1,9 @@
-//#ifndef _SORT_H_
-//#define _SORT_H_
+#ifndef _SORT_H_
+#define _SORT_H_
 
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <time.h> 
 
 #define LEN 8 
 #define SWAP(x,y) {int t; t = x; x = y; y = t;} 
@@ -20,4 +21,4 @@ int descending(int, int); //compare function.
 void quickSort(int[], int, int); 
 
 
-//#endif
+#endif
