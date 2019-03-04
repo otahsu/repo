@@ -1,0 +1,26 @@
+import atexit
+import sys, os, glob
+
+def print_build_failures():
+    from SCons.Script import GetBuildFailures
+    err_list = list()
+    log_file = open("./scons.log", 'w')
+    for bf in GetBuildFailures():
+        #print "%s failed: %s" % (bf.node, bf.errstr)
+        err_list.append("!!!!" + bf.errstr)
+        log_file.write(bf.errstr) 
+    print err_list
+    log_file.close()
+
+Decider('timestamp-newer')
+env = Environment(CPPPATH=['./'], CXXFLAGS = ['-std=c++11','-Wall']) #-pedantic，令編譯器拒絕非標準特性。
+print glob.glob('*.cpp'), glob.glob('_*.cpp')
+src_ls = list(set(glob.glob('*.cpp')) - set(glob.glob('_*.cpp')))
+print src_ls # '_'開頭的.cpp不編譯，以表示尚未整理。
+
+env.Program(target='main', source=src_ls)
+atexit.register(print_build_failures) 
+print "!!after trying build."
+print_build_failures()
+
+# vim: set ft=python:
