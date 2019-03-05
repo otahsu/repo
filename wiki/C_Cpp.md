@@ -2,11 +2,7 @@
 * **module** : means a '.c'/'.cpp' file.
 * **header file** : it usually is for prepocessor-use, including variable declaraion, macro and function prototype only, exluding definition/implemetation. For a module, it can be copy/paste at the fornt with *#include "header.h"* by the compiler in the preopcessor stage.
 * **declaration** : means to declare a variable's type, without initializing/allocating the value/memory.
-<<<<<<< HEAD
 * **definition** : means to allocate the memory space for a varibale/function and initialize values/line-operation on them. Without a specified initialized value, the global variable is setted by 0 defaultly, and the local(automatic) variable is setted by trash-value(undefine behavior). Note that the definition of a variable/function can occur only once between modules, while the declaration can occur many times only if the type of them are the same.
-=======
-* **definition** : means to allocate the memory space for a varibale/function and initialize values/line-operation on them. Without a specified initialized value, the global variable is setted by 0 defaultly, and the local(automatic) variable is setted by trash-value(undefine behavior).
->>>>>>> 0751e3360885bc4bd7378ccdcb8f29433306f45f
 * **automatic variable** : a synonym for *'local variable'*. The scope and liftime is in the block it defined.
 * **external** : a keyword before a declartion to specify the variable be outside any function/block. It's a synonym for *'global'*. The scope of the external varibale is global between all modules for a program. The lifetime is along with the program it belongs.[https://en.wikipedia.org/wiki/External_variable](https://en.wikipedia.org/wiki/External_variable)
 * **static** : static and extern are mutually exclusive. This is a keyword before a declaration of a local/global variable. It means this variable is 'static' or 'stick'. The scope is in the function-block/module, and the lifetime is along with the program.
