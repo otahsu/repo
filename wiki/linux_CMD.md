@@ -676,28 +676,5 @@ $ldd ./so
 $nm -A file
 ```
 
-## Compilers(gcc or g++) ##
-//gcc compiler compile *.c file once at one time.
-//'c' is compile only without linked output.
-$ gcc -c a.c //the output is 'a.o'.
-
-//'pre-processor' statement, ex. '#ifdef', '#include' has only life-scope in .c to .o
-// #include "a.h" in 'a.c' can be seen as pull the codes from 'a.h' into 'a.c' before compliation.
-//Consider a case: 
-    //a.c have #include "a1.h" and #include "a2.h"
-    //b.c have #include "a1.h" and #include "b.h"
-
-//to aviod duplicating 'definition for one declaration' in the 'link stage', we often write only delerations in'*.h'
-//if we write the definition of 'void foo(){}' in 'a1.h', linking of 'a.o' and 'b.o' will fail. 
-
-//?declarations can be re-assign? 
-//But consider a case:
-    //'a.h' include 'a1.h', where 'a1.h' inclue 'a.h'
-    //it forms 'cyclic dependecy'!!
-    //to avoid it, we can use the flag as follows 
-    #ifndef __HEADER_A__
-    #define __HEADER_A__
-    
-    #endif
 # vim: set ft=markdwon ai ts=4 et sw=4 sts=4 tw=105:
 
